@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../../MDB/css/bootstrap.css">
+    <link rel="stylesheet" href="../../MDB/css/mdb.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row ">
+            <div class="col-4 m-auto">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h2>Register Here</h2>
+                    </div>
+                    <div class="card-body bg-light">
+                        <form id="registerForm">
+                            <div class="form-group">
+                                <input type="text" name="firstName" id="firstName" class="form-control"
+                                    placeholder="Enter FirstName">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="lastName" id="lastName" class="form-control"
+                                    placeholder="Enter LastName">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="email" id="email" class="form-control"
+                                    placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="c_password" id="c_password" class="form-control"
+                                    placeholder="Enter Confirm Password">
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="terms" id="terms">
+                                <label class="form-check-label" for="terms">
+                                    Accept Terms & Conditions
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="" class="btn btn-secondary mt-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./jquery-3.6.0.js"></script>
+    <script src="jquery-validation-1.19.3/dist/jquery.validate.js"></script>
+    <script>
+        $.validator.setDefaults({
+            submitHandler: function () {
+                alert("Form Submitted Successfully");
+            }
+        });
+
+        $('#registerForm').validate(
+            {
+                rules: {
+                    firstName: {
+                        required: true,
+                        minlength: 3
+                    },
+                    lastName: {
+                        required: true,
+                        minlength: 3
+                    },
+                    userName: {
+                        required: true,
+                        minlength: 5
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+
+                    c_password: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: '#password'
+                    },
+                    terms: {
+                        required: true
+                    }
+                },
+                messages: {
+
+                    firstName: {
+                        required: 'Please Enter FirstName',
+                        minlength: 'Enter Atleast 3 Characters'
+                    },
+                    lastName: {
+                        required: 'Please Enter LastName',
+                        minlength: 'Enter Atleast 3 Characters'
+                    },
+                    userName: {
+                        required: 'Please Enter UserName',
+                        minlength: 'Enter Atleast 5 Characters'
+                    },
+                    email: {
+                        required: 'Please Enter Email',
+                        email: 'Please Enter Proper Email Id'
+                    },
+                    password: {
+                        required: 'Please Enter Password',
+                        minlength: 'Enter Atleast 5 Characters'
+                    },
+
+                    c_password: {
+                        required: 'Please Enter Confirm Password',
+                        minlength: 'Enter Atleast 5 Characters',
+                        equalTo: 'Both The Passwords Must Be Same'
+                    },
+                    terms: {
+                        required: 'Accept Terms & Conditions'
+                    }
+
+
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    // Add the `invalid-feedback` class to the error element
+                    error.addClass("invalid-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.next("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+    </script>
+</body>
+
+</html>
